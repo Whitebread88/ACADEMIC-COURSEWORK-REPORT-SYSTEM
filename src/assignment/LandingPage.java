@@ -3,9 +3,7 @@ package assignment;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedWriter;
        
 public class LandingPage {
 
@@ -13,6 +11,8 @@ public class LandingPage {
     public static void main(String[] args) {
         ArrayList<Lecturer> lecturer_list = new ArrayList<Lecturer>();
         lecturer_list = ReadFromFile("Lecturer.txt");
+        ArrayList<Module> module_list = new ArrayList<Module>();
+        module_list = ReadFromFile("Module.txt");
         Lecturer L = new Lecturer();
         Admin A = new Admin("admin", "admin", "First", "Last");
         System.out.print("\n\n Academic Coursework Report System \n Select number to log in:\n 1.Admin\n 2.Lecturer\n 3.Exit\n\n Selection:");

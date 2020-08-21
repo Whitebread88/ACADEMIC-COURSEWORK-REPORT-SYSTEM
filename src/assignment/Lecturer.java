@@ -50,7 +50,7 @@ public class Lecturer extends Users{
         sc.nextLine();
         switch (lecturerchoice) {
             case 1:
-                //manage_marks();
+                //manage_mark();
                 break;
             case 2:
                 //generate_report();
