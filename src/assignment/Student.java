@@ -1,14 +1,17 @@
 package assignment;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
-public class Student {
+
+public class Student extends Users implements java.io.Serializable{
     
-    private int studentid;    
-    private String studentname;
-    private String intake;
-    private String program;
+    protected int studentid;    
+    protected String studentname;
+    protected String intake;
+    protected String program;
+    protected static final long serialVersionUID = 1L;
     
     public Student(){};
     
@@ -50,5 +53,11 @@ public class Student {
     public String getprogram(){
         return program;
     }
-}
+    
+    public String toString() {
+        return "\nID: " + getstudentid() + "\nStudent name: " + getstudentname() + "\nIntake: " + getintake() + "\nProgram: " +getprogram();
+    }
+    
+ }
 
+ 

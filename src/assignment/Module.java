@@ -5,30 +5,39 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Module implements java.io.Serializable{
-    private String modulename;
-    private String code;
-
-    public Module(){};
     
-    public Module(String modulename, String code) {
+    protected String modulename;
+    protected int modulecode;
+
+    
+    public Module(String modulename, int modulecode) {
+        
         this.modulename = modulename;
-        this.code = code;
+        this.modulecode = modulecode;
     }
+    
+    public Module(){}
     
     public void setmodulename(String modulename) {
         this.modulename = modulename;
     }
         
-    public void setcode(String code) {
-        this.code = code;
+    public void setmodulecode(int modulecode) {
+        this.modulecode = modulecode;
     }
     
     public String getmodulename() {
         return modulename;
     }
 
-    public String getcode() {
-        return code;
+    public int getmodulecode() {
+        return modulecode;
+    }
+    
+    public String toString(){
+        return "\tModule Name: " + getmodulename() + "\tModule Code: " + getmodulecode() +  "\n";
     }
 
+
 }
+

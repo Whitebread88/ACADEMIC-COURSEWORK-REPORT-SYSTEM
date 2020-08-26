@@ -22,7 +22,7 @@ public class Lecturer extends Users{
         Lecturer lect_login = new Lecturer();
         int flag = 1;
         String lect_username;
-        while (flag != 0) {
+        if (flag != 0) {
             System.out.println("\nLecturer Login page\nEnter your username: ");
             lect_username = sc.nextLine();
             System.out.println("\nEnter your password: ");
@@ -36,10 +36,25 @@ public class Lecturer extends Users{
                 }
             }
             if (flag == 1) {
-                System.out.println("\nInvalid Password");
+                System.out.println("\nInvalid Username/Password");
             }
+        
+        System.out.println("\nDo you want to retry?\n >1.Retry \n >2.Exit");
+        int ans = sc.nextInt();
+        sc.nextLine();
+        switch (ans) {
+            case 1:
+                login();
+                break;
+
+            case 2:
+                System.out.println("\n< Thank you! >");
+                break;
         }
     }
+    }
+
+
     
     public void lecturer_function(){
         Scanner sc = new Scanner(System.in);
@@ -62,6 +77,10 @@ public class Lecturer extends Users{
                 System.out.println("\nInvalid Option.\nPlease try again.");
                 lecturer_function();
         }
-        
     }
+    
+
 }
+    
+    
+    
