@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Admin extends Users implements java.io.Serializable{
 
-    private int stu_id;
+    private int stu_id; //no use
     
     public Admin(String username, String password, String firstname, String lastname){
         super(username, password, firstname, lastname);
@@ -105,7 +105,7 @@ public class Admin extends Users implements java.io.Serializable{
         lecture_list.add(new_lecturer);
         LandingPage.WriteIntoFile("Lecturer.txt", lecture_list);
         System.out.println("\nLecture registration successfull");
-         System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
+        System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
         int ans = sc.nextInt();
         sc.nextLine();
         switch (ans) {
@@ -205,14 +205,14 @@ public class Admin extends Users implements java.io.Serializable{
         int intake_record = 0;
  
 
-        //Check if studentID already exists
+        //Check if intake already exists
         System.out.print("----<Add new module>----\n");
         do{
         System.out.println("\nPlease enter intake code: ");
         String intake_code = sc.nextLine();
         for (Intake intakefromfile : intake_list) {
                     if (intake_code.equals(intakefromfile.getintakecode())) { 
-                    intake_checker = 1;   
+                        intake_checker = 1;   
                     }
                     }
             if (intake_checker == 1) {
@@ -235,7 +235,6 @@ public class Admin extends Users implements java.io.Serializable{
             }
         } while (intake_record == 0);
         
-        Module newmodule = new Module();
        
         //Write information into the file
         System.out.print("\nPlease enter Module Name:");
@@ -265,7 +264,7 @@ public class Admin extends Users implements java.io.Serializable{
    
    
    public void delete_module() {
-       Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("\n----< Delete Module>----");
         System.out.print("Please enter module code to delete: ");
         int moduleToDelete = sc.nextInt();
@@ -278,9 +277,11 @@ public class Admin extends Users implements java.io.Serializable{
             if (moduleinfile.getmodulecode() == moduleToDelete) { //Check if module code exists
                 iter.remove();
                 moduleExists = 1;
-            System.out.println("\nThe module : " + moduleToDelete + " has been deleted.");
-        } else {
-            System.out.println("\n--No associated module exists in system--");
+                System.out.println("\nThe module : " + moduleToDelete + " has been deleted.");
+            }
+        }
+        if (moduleExists == 0) {
+                System.out.println("\n--No associated module exists in system--");
         }
         LandingPage.WriteIntoFile("Module.txt", module_list);
         System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Try again \n>3.Exit");
@@ -300,12 +301,11 @@ public class Admin extends Users implements java.io.Serializable{
                  System.exit(0);
                 break;
         }
-        }
    }
 
    
    public void view_module() {
-       Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
         int i = 1;
         System.out.println("\n----< Module Details >----\nBelows are the information of modules:\n");
@@ -368,7 +368,7 @@ public class Admin extends Users implements java.io.Serializable{
         Scanner sc = new Scanner(System.in);
         int adminchoice;
         System.out.println("\nWelcome to Marks Management page");
-        System.out.println("\n Select function:\n 1.View all marks\n 2.Edit marks\n 3.Generate report\n 4.Exit \n\n Selection:");
+        System.out.println("\n Select function:\n 1.View all marks\n 2.Generate report\n 3.Exit \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
         switch (adminchoice) {
@@ -376,12 +376,9 @@ public class Admin extends Users implements java.io.Serializable{
                 //view_mark();
                 break;
             case 2:
-                //edit_mark();
-                break;
-            case 3:
                 //generate_report();
                 break;
-            case 4:
+            case 3:
                 System.exit(0);
                 break;
             default:
@@ -391,8 +388,12 @@ public class Admin extends Users implements java.io.Serializable{
        
     }
     
+    public void view_mark(){
+        
+    }
+    
     public void add_student(){
-         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
+        ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
         Scanner sc = new Scanner(System.in);
         int idchecker = 0;
         int idrecord = 0;
@@ -429,8 +430,6 @@ public class Admin extends Users implements java.io.Serializable{
             }
         } while (idrecord == 0);
         //Input new student details
-        Student newstudent = new Student();
-
         //Record new student details
         System.out.print("\nName of student:");
         String newstudentname = sc.nextLine();
@@ -573,7 +572,7 @@ public class Admin extends Users implements java.io.Serializable{
             int editChoice;
 
             do { //Loop to repeat edit student menu
-                System.out.println("\n Please select the information to update:\n >1.Name\n >2.Intake \n >3.Program\n \n >Enter 999 to confirm the update details");
+                System.out.println("\n Please select the information to update:\n >1.Name\n >2.Intake \n >3.Program\n \n >Enter 999 to finalise student details");
                 editChoice = sc.nextInt();
                 sc.nextLine();
                 switch (editChoice) {
@@ -590,9 +589,16 @@ public class Admin extends Users implements java.io.Serializable{
                         s1.setintake(newintake);
                         System.out.println("\nIntake has been updated into: " + s1.getintake() + "\n------------------------------");
                         break;
+                        
+                    case 3: //Update program
+                        System.out.println("\nPlease enter new program:");
+                        String newprogram = sc.nextLine();
+                        s1.setprogram(newprogram);
+                        System.out.println("\nIntake has been updated into: " + s1.getprogram() + "\n------------------------------");
+                        break;
 
                     case 999: //Display updated details
-                        System.out.println("\nUpdated student details as below:\n" + s1 + "------------------------------");
+                        System.out.println("\nUpdated student details as below:\n" + s1 + "\n------------------------------");
                         break;
 
                     default:
@@ -600,6 +606,7 @@ public class Admin extends Users implements java.io.Serializable{
 
                 }
             } while (editChoice != 999);
+            
             Iterator<Student> iter = student_list.iterator();        //Iterator to delete old student details
             while (iter.hasNext()) {
                 Student s = iter.next();
@@ -626,7 +633,7 @@ public class Admin extends Users implements java.io.Serializable{
         }
       
       public void view_student() {
-           Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
         int i = 1;
         System.out.println("\n----< Student Details >----\nBelows are the information of students:\n");

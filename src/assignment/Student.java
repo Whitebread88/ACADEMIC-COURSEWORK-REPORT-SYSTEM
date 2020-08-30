@@ -5,7 +5,7 @@ import java.util.*;
 import java.io.*;
 
 
-public class Student extends Users implements java.io.Serializable{
+public class Student implements java.io.Serializable{
     
     protected int studentid;    
     protected String studentname;

@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 public class Module implements java.io.Serializable{
     
-    protected String modulename;
-    protected int modulecode;
+    private String modulename;
+    private int modulecode;
+    private Student student;
+    private ArrayList<Mark> mark_list;
 
+        
+    public Module(){}
     
     public Module(String modulename, int modulecode) {
         
@@ -16,7 +20,10 @@ public class Module implements java.io.Serializable{
         this.modulecode = modulecode;
     }
     
-    public Module(){}
+    public Module(Student student, ArrayList mark_list){
+        this.student = student;
+        this.mark_list = mark_list;
+    }
     
     public void setmodulename(String modulename) {
         this.modulename = modulename;
@@ -24,6 +31,14 @@ public class Module implements java.io.Serializable{
         
     public void setmodulecode(int modulecode) {
         this.modulecode = modulecode;
+    }
+    
+    public void setstudent(Student student){
+        this.student = student;
+    }
+    
+    public void setmarklist(ArrayList mark_list){
+        this.mark_list = mark_list;
     }
     
     public String getmodulename() {
@@ -34,10 +49,19 @@ public class Module implements java.io.Serializable{
         return modulecode;
     }
     
+    public Student getstudent(){
+        return student;
+    }
+    
+    public ArrayList getmark(){
+        return mark_list;
+    }
+    
     public String toString(){
-        return "\tModule Name: " + getmodulename() + "\tModule Code: " + getmodulecode() +  "\n";
+        return "\tModule Name: " + getmodulename() + "\tModule Code: " + getmodulecode();
     }
 
+  
 
 }
 
