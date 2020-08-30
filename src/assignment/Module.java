@@ -1,8 +1,15 @@
 package assignment;
 
 import java.util.Scanner;
+import java.util.*;
 import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 public class Module implements java.io.Serializable{
     
@@ -10,7 +17,7 @@ public class Module implements java.io.Serializable{
     private int modulecode;
     private Student student;
     private ArrayList<Mark> mark_list;
-
+    private static final long serialVersionUID = 1L;
         
     public Module(){}
     
@@ -20,7 +27,9 @@ public class Module implements java.io.Serializable{
         this.modulecode = modulecode;
     }
     
-    public Module(Student student, ArrayList mark_list){
+    public Module(String modulename, int modulecode, Student student, ArrayList mark_list){
+        this.modulename = modulename;
+        this.modulecode = modulecode;
         this.student = student;
         this.mark_list = mark_list;
     }
@@ -53,7 +62,7 @@ public class Module implements java.io.Serializable{
         return student;
     }
     
-    public ArrayList getmark(){
+    public ArrayList getmarks(){
         return mark_list;
     }
     

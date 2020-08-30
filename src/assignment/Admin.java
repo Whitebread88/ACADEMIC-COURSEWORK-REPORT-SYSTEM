@@ -439,6 +439,7 @@ public class Admin extends Users implements java.io.Serializable{
 
         System.out.print("\nProgram: ");
         String newprogram = sc.nextLine();
+        
 
         //Write all the information into the file
          System.out.println("\n ----< New student created successfully! >----");
@@ -656,6 +657,35 @@ public class Admin extends Users implements java.io.Serializable{
                  System.exit(0);
                 break;
             }
+    }
+      
+    public void add_Smodule(Student ArrayList){
+        
+        Scanner sc = new Scanner(System.in);
+        Module newmodule = new Module();
+        ArrayList<Mark> mark_list = new ArrayList<>();
+
+        ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
+        int i = 1;
+        System.out.println("\nModules are: ");
+        for (Module modulefromfile : module_list) {
+            System.out.println("Module" + i + ":");
+            System.out.println(modulefromfile);
+            System.out.println("-------------------------");
+            i++;
+        }
+        
+        System.out.print("\nPlease enter Module Code to add to student:");
+        int module_code = sc.nextInt();
+        sc.nextLine();
+
+
+//        newmodule.setmodulecode(mod_code);
+//        module_list.add(newmodule);
+//
+//        module_list.add(new Module(newmodule));
+//        System.out.println("\nIntake has been updated into: " + s1.getmodule() + "\n------------------------------");
+                        
     }
 }
 

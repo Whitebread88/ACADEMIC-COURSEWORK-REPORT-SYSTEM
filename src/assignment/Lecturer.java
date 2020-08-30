@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 
-public class Lecturer extends Users{
+public class Lecturer extends Users implements java.io.Serializable{
 
     public Lecturer() {}
 
@@ -117,7 +117,7 @@ public class Lecturer extends Users{
         int studentToEdit= sc.nextInt();
         sc.nextLine();
                 
-        int loop = 1;
+
         int idExists = 0;
         for (Student studentfromfile : student_list) {
             if (studentfromfile.getstudentid() == studentToEdit) {
@@ -144,14 +144,13 @@ public class Lecturer extends Users{
                 break;
             }
         } else {
-            Module studentEdit = new Module();
             ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
             int checkIdExists = 0;
             Module m = new Module();
             System.out.println("Enter module code to edit marks: ");
             int modulecode = sc.nextInt();
             sc.nextLine();
-            int loop2 = 1;
+
             int idExists2 = 0;
             for (Module modulefromfile : module_list) {
                 if (modulefromfile.getmodulecode() == modulecode) {
@@ -179,27 +178,19 @@ public class Lecturer extends Users{
                 }
             } else {
                 System.out.println("Enter marks: ");
-                Mark marklist = new Mark();
-                int mark1 = sc.nextInt();
-                sc.nextLine();
-                int mark2 = sc.nextInt();
-                sc.nextLine();
-                int mark3 = sc.nextInt();
-                sc.nextLine();
-                marklist.setassignment_mark(mark1);
-                marklist.setexam_mark(mark2);
-                marklist.settest_mark(mark3);
-                
                 Module module = new Module();
                 ArrayList<Mark> mark_list = new ArrayList<>();
+                
+                int mark1 = sc.nextInt();
+                sc.nextLine();
+                Mark marklist = new Mark(mark1);
+
+                
                 mark_list.add(marklist);
                 module.setmarklist(mark_list);
+                System.out.println(module.getmarks()+ " marks inside " + module.getmodulename()); //WTFF is this
                 
-                System.out.println(module.getmark()+ " marks inside " + module.getmodulename()); //WTFF is this
                 
-                mark_list = LandingPage.ReadFromFile("Mark.txt");
-                mark_list.add(marklist);
-                LandingPage.WriteIntoFile("Mark.txt", mark_list);
             }
         }
     }

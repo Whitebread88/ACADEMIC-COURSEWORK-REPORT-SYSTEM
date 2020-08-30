@@ -11,6 +11,7 @@ public class Student implements java.io.Serializable{
     protected String studentname;
     protected String intake;
     protected String program;
+    private ArrayList<Module> module_list;
     protected static final long serialVersionUID = 1L;
     
     public Student(){};
@@ -38,6 +39,10 @@ public class Student implements java.io.Serializable{
         this.program = program;
     }
     
+    public void setmodule(ArrayList module_list){
+        this.module_list = module_list;
+    }
+    
     public int getstudentid(){
         return studentid;
     }
@@ -52,6 +57,10 @@ public class Student implements java.io.Serializable{
     
     public String getprogram(){
         return program;
+    }
+    
+    public ArrayList getmodule(){
+        return module_list;
     }
     
     public String toString() {
