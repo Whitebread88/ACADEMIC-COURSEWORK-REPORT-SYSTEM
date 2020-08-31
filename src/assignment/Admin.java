@@ -203,7 +203,6 @@ public class Admin extends Users implements java.io.Serializable{
         Scanner sc = new Scanner(System.in);
         int intake_checker = 0;
         int intake_record = 0;
- 
 
         //Check if intake already exists
         System.out.print("----<Add new module>----\n");
@@ -241,9 +240,9 @@ public class Admin extends Users implements java.io.Serializable{
         String mod_name = sc.nextLine();
         System.out.print("\nPlease enter Module Code:");
         int mod_code = sc.nextInt();
-       
+        
         System.out.println("\n ----< New module created successfully! >----");
-        Module RegisteredModule = new Module(mod_name, mod_code);
+        Module RegisteredModule = new Module(mod_name,mod_code);
         module_list.add(RegisteredModule);
         System.out.println(RegisteredModule);
         LandingPage.WriteIntoFile("Module.txt", module_list);
@@ -261,7 +260,7 @@ public class Admin extends Users implements java.io.Serializable{
                 break;
         }
     }
-   
+
    
    public void delete_module() {
         Scanner sc = new Scanner(System.in);
@@ -271,7 +270,7 @@ public class Admin extends Users implements java.io.Serializable{
         int moduleExists = 0;
         sc.nextLine();
         ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
-        Iterator<Module> iter = module_list.iterator();        //Iterator to find order 
+        Iterator<Module> iter = module_list.iterator();        //Iterator to delete module
         while (iter.hasNext()) {
             Module moduleinfile = iter.next();
             if (moduleinfile.getmodulecode() == moduleToDelete) { //Check if module code exists

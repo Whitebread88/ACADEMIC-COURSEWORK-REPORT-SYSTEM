@@ -13,11 +13,11 @@ import java.io.Serializable;
 
 public class Module implements java.io.Serializable{
     
-    private String modulename;
-    private int modulecode;
-    private Student student;
-    private ArrayList<Mark> mark_list;
-    private static final long serialVersionUID = 1L;
+    protected String modulename;
+    protected int modulecode;
+    protected Student student;
+    protected ArrayList<Mark> mark_list;
+    protected static final long serialVersionUID = 1L;
         
     public Module(){}
     
@@ -42,6 +42,7 @@ public class Module implements java.io.Serializable{
         this.modulecode = modulecode;
     }
     
+
     public void setstudent(Student student){
         this.student = student;
     }

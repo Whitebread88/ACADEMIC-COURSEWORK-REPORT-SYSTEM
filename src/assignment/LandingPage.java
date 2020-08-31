@@ -17,6 +17,8 @@ public class LandingPage {
         student_list = ReadFromFile("Student.txt");
         ArrayList<Intake> intake_list = new ArrayList<Intake>();
         intake_list = ReadFromFile("Intake.txt");
+        ArrayList<Mark> mark_list = new ArrayList<Mark>();
+        mark_list = ReadFromFile("Mark.txt");
         Lecturer L = new Lecturer();
         Admin A = new Admin("admin", "admin", "First", "Last");
                 
