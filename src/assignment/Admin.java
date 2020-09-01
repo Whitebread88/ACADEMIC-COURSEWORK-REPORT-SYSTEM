@@ -61,6 +61,7 @@ public class Admin extends Users implements java.io.Serializable{
     }
     
     public void lecturer_register() {
+        ArrayList<Lecturer> lecturer_list = new ArrayList<>();
         ArrayList<Lecturer> lecture_list = LandingPage.ReadFromFile("Lecturer.txt");
         Scanner sc = new Scanner(System.in);
         int username_flag = 0;
@@ -123,7 +124,7 @@ public class Admin extends Users implements java.io.Serializable{
         Scanner sc = new Scanner(System.in);
         int adminchoice;
         System.out.println("\nWelcome to Module page");
-        System.out.println("\n Select function:\n 1.New intake\n 2.Add module\n 3.View module\n 4.Delete Module\n 5.Exit \n\n Selection:");
+        System.out.println("\n Select function:\n 1.New intake\n 2.Add module\n 3.View module\n 4.Delete Module\n 5.Exit \n 6.Main Menu \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
         switch (adminchoice) {
@@ -140,6 +141,9 @@ public class Admin extends Users implements java.io.Serializable{
                 delete_module();
             case 5:
                 System.exit(0);
+                break;
+            case 6:
+                admin_function();
                 break;
             default:
                 System.out.println("\nInvalid Option.\nPlease try again.");
@@ -203,6 +207,10 @@ public class Admin extends Users implements java.io.Serializable{
         Scanner sc = new Scanner(System.in);
         int intake_checker = 0;
         int intake_record = 0;
+        int modname_checker =0;
+        int modname_record =0;
+        int modcode_checker =0;
+        int modcode_record =0;
 
         //Check if intake already exists
         System.out.print("----<Add new module>----\n");
@@ -219,7 +227,7 @@ public class Admin extends Users implements java.io.Serializable{
             }else{
                 intake_checker = 0;
                 System.out.print("\n---< Intake does not exist,unable to add module >---\n");
-                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Exit");
+                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Main Menu \n3.Exit");
                 int ans = sc.nextInt();
                 sc.nextLine();
                 switch (ans) {
@@ -227,6 +235,9 @@ public class Admin extends Users implements java.io.Serializable{
                     add_module();
                 break;
                 case 2:
+                    admin_function();
+                    break;
+                case 3:
                      System.out.println("\n< Thank you! >");
                       System.exit(0);
                 break;
@@ -234,34 +245,93 @@ public class Admin extends Users implements java.io.Serializable{
             }
         } while (intake_record == 0);
         
-       
         //Write information into the file
+        
         System.out.print("\nPlease enter Module Name:");
         String mod_name = sc.nextLine();
-        System.out.print("\nPlease enter Module Code:");
-        int mod_code = sc.nextInt();
-        
-        System.out.println("\n ----< New module created successfully! >----");
-        Module RegisteredModule = new Module(mod_name,mod_code);
-        module_list.add(RegisteredModule);
-        System.out.println(RegisteredModule);
-        LandingPage.WriteIntoFile("Module.txt", module_list);
-        System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
-        int ans = sc.nextInt();
-        sc.nextLine();
-        switch (ans) {
-            case 1:
-                admin_function();
+       for (Module  module_file: module_list) {
+                if (module_file.getmodulename().equals(mod_name)) {        
+                    modname_checker = 1;
+                }
+            }
+            if (modname_checker == 0) {
+                modname_record =0 ;
+            } else {
+                modname_checker = 1;
+                System.out.print("\n---< Module name already exists >---\n"); //check if module name exists 
+                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Main Menu \n3.Exit");
+                int ans = sc.nextInt();
+                sc.nextLine();
+                switch (ans) {
+                case 1:
+                    add_module();
                 break;
-
-            case 2:
-                System.out.println("\n< Thank you! >");
-                 System.exit(0);
+                case 2:
+                    admin_function();
+                    break;
+                case 3:
+                     System.out.println("\n< Thank you! >");
+                      System.exit(0);
                 break;
-        }
-    }
+            }
+            }
 
-   
+            do{
+
+                         System.out.print("\nPlease enter Module Code:"); //check if module code exists 
+                         int mod_code = sc.nextInt();
+                        for (Module  module_file: module_list) {
+                        if (module_file.getmodulecode() == mod_code) {        
+                            modcode_checker = 1;
+                        }
+                    }
+                    if (modcode_checker == 0) {
+                        modcode_record =0 ;
+                    } else {
+                        modcode_checker = 1;
+                        System.out.print("\n---< Module code already exists >---\n");
+                        System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Main Menu \n3.Exit");
+                        int ans = sc.nextInt();
+                        sc.nextLine();
+                        switch (ans) {
+                        case 1:
+                            add_module();
+                        break;
+                        case 2:
+                            admin_function();
+                        break;
+                        case 3:
+                             System.out.println("\n< Thank you! >");
+                              System.exit(0);
+                        break;
+                    }
+                    }
+                                 
+                            System.out.println("\n ----< New module created successfully! >----");
+                             Module RegisteredModule = new Module(mod_name,mod_code);
+                            module_list.add(RegisteredModule);
+                            System.out.println(RegisteredModule);
+                            LandingPage.WriteIntoFile("Module.txt", module_list);
+                            System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
+                             int ans1 = sc.nextInt();
+                            sc.nextLine();
+                            switch (ans1) {
+                                case 1:
+                                    admin_function();
+                                    break;
+
+                                case 2:
+                                    System.out.println("\n< Thank you! >");
+                                     System.exit(0);
+                                    break;
+                                     }
+                                
+                         } while (modname_record == 0);
+   }
+  
+
+
+
    public void delete_module() {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n----< Delete Module>----");
@@ -334,7 +404,7 @@ public class Admin extends Users implements java.io.Serializable{
         Scanner sc = new Scanner(System.in);
         int adminchoice;
         System.out.println("\nWelcome to Student Management page");
-        System.out.println("\n Select function:\n 1.Add student\n 2.Delete Student\n 3.Search Student\n 4.Edit student details\n 5.View student details \n 6.Manage Mark\n 7.Exit \n\n Selection:");
+        System.out.println("\n Select function:\n 1.Add student\n 2.Delete Student\n 3.Search Student\n 4.Edit student details\n 5.View student details \n 6.Manage Mark\n 7.Exit \n 8.Main Menu \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
         switch (adminchoice) {
@@ -357,6 +427,10 @@ public class Admin extends Users implements java.io.Serializable{
                 break;
             case 7:
                 System.exit(0);
+                break;
+            case 8:
+                admin_function();
+                break;
             default:
                 System.out.println("\nInvalid Option.\nPlease try again.");
                 manage_student();
@@ -372,7 +446,7 @@ public class Admin extends Users implements java.io.Serializable{
         sc.nextLine();
         switch (adminchoice) {
             case 1:
-                //view_mark();
+                view_mark();
                 break;
             case 2:
                 //generate_report();
@@ -387,16 +461,43 @@ public class Admin extends Users implements java.io.Serializable{
        
     }
     
-    public void view_mark(){
-        
-    }
-    
+     public void view_mark() {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Mark> mark_list = LandingPage.ReadFromFile("Mark.txt");
+        int i = 1;
+        System.out.println("\n----< Student Marks Details >----\nBelows are the information of students marks:\n");
+        for (Mark mark : mark_list) {
+            System.out.print("Student # " + i + " : " +mark.getstudent() + "\nModule: " +mark.getmodule() +"\nTotal Mark:" +mark.findtotalmark());
+            System.out.println("\n-------------------------------");
+            i++;
+        }
+            System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
+            int ans = sc.nextInt();
+            sc.nextLine();
+            switch (ans) {
+            case 1:
+                admin_function();
+                break;
+
+            case 2:
+                System.out.println("\n< Thank you! >");
+                 System.exit(0);
+                break;
+            }
+     }
+     
+     
     public void add_student(){
         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
+        ArrayList<Intake> intake_list = LandingPage.ReadFromFile("Intake.txt");
         Scanner sc = new Scanner(System.in);
         int idchecker = 0;
         int idrecord = 0;
         int stu_id;    
+        int intake_checker =0;
+        int intake_record =0;
+        
+        
         //Check if studentID already exists
         System.out.print("----<Register student>----\n");
 
@@ -414,7 +515,7 @@ public class Admin extends Users implements java.io.Serializable{
             } else {
                 idchecker = 0;
                 System.out.print("\n---< ID already existed >---\n");
-                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Exit");
+                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Main Menu \n>2.Exit");
                 int ans = sc.nextInt();
                 sc.nextLine();
                 switch (ans) {
@@ -422,6 +523,9 @@ public class Admin extends Users implements java.io.Serializable{
                     add_student();
                 break;
                 case 2:
+                    admin_function();
+                    break;
+                case 3:
                      System.out.println("\n< Thank you! >");
                       System.exit(0);
                 break;
@@ -433,12 +537,39 @@ public class Admin extends Users implements java.io.Serializable{
         System.out.print("\nName of student:");
         String newstudentname = sc.nextLine();
 
-        System.out.print("\nIntake: ");
+        System.out.print("\nIntake: "); 
         String newintake = sc.nextLine();
-
+        for (Intake intake_file: intake_list) {
+                if (intake_file.getintakecode().equals(newintake)) {        
+                    intake_checker = 1;
+                }
+            }
+            if (intake_checker == 1) {
+                intake_record = 1;
+            } else {
+                intake_checker = 0;
+                System.out.print("\n---< Intake does not exist >---\n");
+                System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Main Menu \n>3.Exit");
+                int ans = sc.nextInt();
+                sc.nextLine();
+                switch (ans) {
+                case 1:
+                    add_student();
+                break;
+                case 2:
+                    admin_function();
+                    break;
+                case 3:
+                     System.out.println("\n< Thank you! >");
+                      System.exit(0);
+                break;
+            }
+            }
+  
+        do{
         System.out.print("\nProgram: ");
         String newprogram = sc.nextLine();
-        
+    
 
         //Write all the information into the file
          System.out.println("\n ----< New student created successfully! >----");
@@ -459,7 +590,8 @@ public class Admin extends Users implements java.io.Serializable{
                  System.exit(0);
                 break;
         }
-    
+        }while (intake_record == 1);
+        
     }
     
      public void delete_student() {
@@ -538,7 +670,10 @@ public class Admin extends Users implements java.io.Serializable{
         System.out.println("\n----< Edit student details>----\n");
         Scanner sc = new Scanner(System.in);
         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
+        ArrayList<Intake> intake_list = LandingPage.ReadFromFile("Intake.txt");
         Student s1 = new Student();
+        int intake_checker = 0;
+        int intake_record =0;
         System.out.print("\nPlease enter ID number of student to edit: ");
         int idToEdit = sc.nextInt();
         sc.nextLine();
@@ -586,9 +721,34 @@ public class Admin extends Users implements java.io.Serializable{
                     case 2: //Update intake
                         System.out.println("\nPlease enter new intake code:");
                         String newintake = sc.nextLine();
+                        for (Intake intake_file: intake_list) {
+                        if (intake_file.getintakecode().equals(newintake)) {        
+                        intake_checker = 1;
+                      }
+                        }
+                        if (intake_checker == 1) {
+                            intake_record = 1;
+                        } else {
+                            intake_checker = 0;
+                            System.out.print("\n---< Intake does not exist >---\n");
+                            System.out.println("\nDo you want to try again?\n >1.Try again \n >2.Exit");
+                            int ans = sc.nextInt();
+                            sc.nextLine();
+                            switch (ans) {
+                            case 1:
+                               edit_student();
+                            break;
+                            case 2:
+                                 System.out.println("\n< Thank you! >");
+                                  System.exit(0);
+                            break;
+                        }
+                        }
+                
                         s1.setintake(newintake);
                         System.out.println("\nIntake has been updated into: " + s1.getintake() + "\n------------------------------");
                         break;
+                     
                         
                     case 3: //Update program
                         System.out.println("\nPlease enter new program:");
@@ -603,8 +763,7 @@ public class Admin extends Users implements java.io.Serializable{
 
                     default:
                         break;
-
-                }
+                            }
             } while (editChoice != 999);
             
             Iterator<Student> iter = student_list.iterator();        //Iterator to delete old student details
@@ -686,5 +845,7 @@ public class Admin extends Users implements java.io.Serializable{
 //        System.out.println("\nIntake has been updated into: " + s1.getmodule() + "\n------------------------------");
                         
     }
-}
 
+
+       
+    }
