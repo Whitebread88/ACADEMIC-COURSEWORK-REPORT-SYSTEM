@@ -4,10 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
-       
+
 public class LandingPage {
 
-   
     public static void main(String[] args) {
         ArrayList<Lecturer> lecturer_list = new ArrayList<Lecturer>();
         lecturer_list = ReadFromFile("Lecturer.txt");
@@ -21,9 +20,9 @@ public class LandingPage {
         mark_list = ReadFromFile("Mark.txt");
         Lecturer L = new Lecturer();
         Admin A = new Admin("admin", "admin", "First", "Last");
-                
-        Student s1 = new Student(123,"ali","uc2f2006","CS");
-        
+
+        Student s1 = new Student(123, "ali", "uc2f2006", "CS");
+
         System.out.print("\n\n Academic Coursework Report System \n Select number to log in:\n 1.Admin\n 2.Lecturer\n 3.Exit\n\n Selection:");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
@@ -34,7 +33,7 @@ public class LandingPage {
                 break;
 
             case 2:
-                L.login(); 
+                L.login();
                 break;
 
             case 3: //Registration
@@ -46,7 +45,7 @@ public class LandingPage {
                 break;
         }
     }
-    
+
     public static ArrayList ReadFromFile(String filename) {
         ArrayList<Object> listfromfile = new ArrayList<>();
         try {
@@ -55,13 +54,14 @@ public class LandingPage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             listfromfile = (ArrayList) ois.readObject();
             ois.close();
-        } catch (IOException ex) {} 
-        catch (ClassNotFoundException ex) {}
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
         return listfromfile;
     }
 
     //Method to serialize arraylist into file
-    public static void WriteIntoFile(String filename, ArrayList new_data) {  
+    public static void WriteIntoFile(String filename, ArrayList new_data) {
         ArrayList<Object> listintofile = new_data;
         try {
             File fw = new File(filename);
@@ -69,6 +69,7 @@ public class LandingPage {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(listintofile);
             oos.close();
-        } catch (IOException ex) {}
+        } catch (IOException ex) {
+        }
     }
 }

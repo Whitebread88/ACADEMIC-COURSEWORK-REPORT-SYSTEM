@@ -21,7 +21,7 @@ public class Module implements java.io.Serializable{
         
     public Module(){}
     
-    public Module(String modulename, int modulecode) {
+    public Module( String modulename, int modulecode) {
         
         this.modulename = modulename;
         this.modulecode = modulecode;
@@ -33,6 +33,7 @@ public class Module implements java.io.Serializable{
         this.student = student;
         this.mark_list = mark_list;
     }
+    
     
     public void setmodulename(String modulename) {
         this.modulename = modulename;
@@ -50,6 +51,7 @@ public class Module implements java.io.Serializable{
     public void setmarklist(ArrayList mark_list){
         this.mark_list = mark_list;
     }
+    
     
     public String getmodulename() {
         return modulename;

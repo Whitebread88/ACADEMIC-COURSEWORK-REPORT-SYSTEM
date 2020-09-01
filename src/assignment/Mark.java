@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class Mark implements java.io.Serializable {
     
     //Association
+    private int markid;
     private int testmark;
     private int exammark;
     private int assignmentmark;
@@ -28,13 +29,22 @@ public class Mark implements java.io.Serializable {
 
     public Mark(){}
     
-    public Mark(Student student,Module module, int testmark,int exammark , int assignmentmark) {
+    public Mark(Student student,Module module, int markid,int testmark,int exammark , int assignmentmark) {
         this.student = student;
         this.module = module;
+        this.markid = markid;
         this.testmark = testmark;
         this.exammark = exammark;
         this.assignmentmark = assignmentmark;
 
+    }
+    
+    public void setmarkid(int markid){
+        this.markid = markid;
+    }
+    
+    public int getmarkid(){
+        return markid;
     }
     
     public void settestmark(int testmark) {
@@ -99,9 +109,9 @@ public class Mark implements java.io.Serializable {
     }
 
     public String toString(){
-        return "\nStudent: " +getstudent() + "\nModule: " +getmodule() + "\nTest Mark: " +gettestmark() + "\nExam Mark: " +getexammark() +"\nAssignment Mark: " +getassignmentmark() + "\nTotal Marks: \n" + findtotalmark() + "\n-------------------------------------------"; 
-        
-       
-    }
+        return "\nStudent: " +getstudent() + "\nModule: " +getmodule() + "\nMark ID: " +getmarkid() +"\nTest Mark: " +gettestmark() + "\nExam Mark: " +getexammark() +"\nAssignment Mark: " +getassignmentmark() + "\nTotal Marks: \n" + findtotalmark() + "\n-------------------------------------------"; 
+    }  
+    
+    
 
 }
