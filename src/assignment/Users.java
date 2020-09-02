@@ -1,14 +1,5 @@
 package assignment;
 
-import java.util.Scanner;
-import java.util.*;
-import java.io.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.Serializable;
 
 public abstract class Users implements java.io.Serializable {
@@ -18,7 +9,7 @@ public abstract class Users implements java.io.Serializable {
     protected String firstname;
     protected String lastname;
 
-    public Users(){};
+    public Users() {}
     
     public Users(String username, String password, String firstname, String lastname) {
         this.username = username;
@@ -26,11 +17,11 @@ public abstract class Users implements java.io.Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-    
+
     public void setusername(String username) {
         this.username = username;
     }
-        
+
     public void setpassword(String password) {
         this.password = password;
     }
@@ -42,7 +33,7 @@ public abstract class Users implements java.io.Serializable {
     public void setlastname(String lastname) {
         this.lastname = lastname;
     }
-    
+
     public String getusername() {
         return username;
     }
@@ -58,7 +49,5 @@ public abstract class Users implements java.io.Serializable {
     public String getlastname() {
         return lastname;
     }
-
-
 
 }

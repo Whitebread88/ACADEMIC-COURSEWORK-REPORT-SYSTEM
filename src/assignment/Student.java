@@ -1,20 +1,18 @@
 package assignment;
 
-import java.util.Scanner;
 import java.util.*;
-import java.io.*;
+import java.io.Serializable;
 
+public class Student implements java.io.Serializable {
 
-public class Student implements java.io.Serializable{
-    
-    protected int studentid;    
+    protected int studentid;
     protected String studentname;
     protected String intake;
     protected String program;
     private ArrayList<Module> module_list;
     protected static final long serialVersionUID = 1L;
-    
-    public Student(){};
+
+    public Student(){}
     
     public Student(int studentid, String studentname, String intake, String program) {
         this.studentid = studentid;
@@ -22,7 +20,7 @@ public class Student implements java.io.Serializable{
         this.intake = intake;
         this.program = program;
     }
-    
+
     public void setstudentid(int studentid) {
         this.studentid = studentid;
     }
@@ -34,16 +32,16 @@ public class Student implements java.io.Serializable{
     public void setintake(String intake) {
         this.intake = intake;
     }
-    
+
     public void setprogram(String program) {
         this.program = program;
     }
-    
-    public void setmodule(ArrayList module_list){
+
+    public void setmodule(ArrayList module_list) {
         this.module_list = module_list;
     }
-    
-    public int getstudentid(){
+
+    public int getstudentid() {
         return studentid;
     }
 
@@ -54,19 +52,17 @@ public class Student implements java.io.Serializable{
     public String getintake() {
         return intake;
     }
-    
-    public String getprogram(){
+
+    public String getprogram() {
         return program;
     }
-    
-    public ArrayList getmodule(){
+
+    public ArrayList getmodule() {
         return module_list;
     }
-    
-    public String toString() {
-        return "\nID: " + getstudentid() + "\nStudent name: " + getstudentname() + "\nIntake: " + getintake() + "\nProgram: " +getprogram();
-    }
-    
- }
 
- 
+    public String toString() {
+        return "\nStudent ID: " + getstudentid() + "\nStudent name: " + getstudentname() + "\nIntake: " + getintake() + "\nProgram: " + getprogram();
+    }
+
+}

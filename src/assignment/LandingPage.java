@@ -20,7 +20,6 @@ public class LandingPage {
         mark_list = ReadFromFile("Mark.txt");
         Lecturer L = new Lecturer();
         Admin A = new Admin("admin", "admin", "First", "Last");
-
         Student s1 = new Student(123, "ali", "uc2f2006", "CS");
 
         System.out.print("\n\n Academic Coursework Report System \n Select number to log in:\n 1.Admin\n 2.Lecturer\n 3.Exit\n\n Selection:");

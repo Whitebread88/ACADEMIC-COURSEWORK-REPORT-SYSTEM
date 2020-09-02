@@ -1,9 +1,7 @@
 
 package assignment;
 
-import java.util.Scanner;
-import java.util.*;
-import java.io.*;
+import java.io.Serializable;
 
 public class Intake implements java.io.Serializable{
     
