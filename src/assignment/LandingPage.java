@@ -21,8 +21,7 @@ public class LandingPage {
         Lecturer L = new Lecturer();
         Admin A = new Admin("admin", "admin", "First", "Last");
         Student s1 = new Student(123, "ali", "uc2f2006", "CS");
-
-        System.out.print("\n\n Academic Coursework Report System \n Select number to log in:\n 1.Admin\n 2.Lecturer\n 3.Exit\n\n Selection:");
+        System.out.print("\nAcademic Coursework Report System\n Kong Xin Ying TP055102\n Foong Kit Wah TP049786\n\n Select number to log in:\n 1.Admin\n 2.Lecturer\n 3.Exit\n\n Selection:");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         sc.nextLine();
@@ -32,7 +31,7 @@ public class LandingPage {
                 break;
 
             case 2:
-                L.login();
+                L.login(); //Overriding
                 break;
 
             case 3: //Registration
@@ -45,6 +44,7 @@ public class LandingPage {
         }
     }
 
+    //Methods to deserialize object from file
     public static ArrayList ReadFromFile(String filename) {
         ArrayList<Object> listfromfile = new ArrayList<>();
         try {
@@ -71,4 +71,5 @@ public class LandingPage {
         } catch (IOException ex) {
         }
     }
+    
 }
