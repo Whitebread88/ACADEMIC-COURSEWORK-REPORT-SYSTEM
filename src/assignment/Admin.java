@@ -1,5 +1,6 @@
 package assignment;
 
+import com.itextpdf.text.BaseColor;
 import java.util.Scanner;
 import java.util.*;
 import java.io.*;
@@ -22,7 +23,7 @@ public class Admin extends Users implements java.io.Serializable {
 
         int flag = 0;
         while (flag == 0) {
-            System.out.println(" \nWelcome to Admin login page\nEnter username:");
+            System.out.println(" \n----< Welcome to Admin login page >----\nEnter username:");
             Scanner sc = new Scanner(System.in);
             String admin_username = sc.nextLine();
             if (admin_username.equals("admin")) {
@@ -70,7 +71,7 @@ public class Admin extends Users implements java.io.Serializable {
     public void admin_function() {
         Scanner sc = new Scanner(System.in);
         int adminchoice;
-        System.out.println("\nWelcome to Admin page");
+        System.out.println("\n----< Welcome to Admin page >-----");
         System.out.println("\n Select function:\n 1.Manage Module\n 2.Manage Student\n 3.Register Lecturer\n 4.View Lecturers\n 5.Exit \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
@@ -102,7 +103,7 @@ public class Admin extends Users implements java.io.Serializable {
         int username_flag = 0;
         int usernamefile = 0;
         String lect_username;
-        System.out.println("\nRegister new lecturer");
+        System.out.println("\n----< Lecturer Registration Page >-----");
         do {
             System.out.println("Enter new lecturer username: ");
             lect_username = sc.nextLine();
@@ -140,7 +141,7 @@ public class Admin extends Users implements java.io.Serializable {
         Lecturer new_lecturer = new Lecturer(lect_username, lect_password, lect_firstname, lect_lastname);
         lecture_list.add(new_lecturer);
         LandingPage.WriteIntoFile("Lecturer.txt", lecture_list);
-        System.out.println("\nLecture registration successfull");
+        System.out.println("\n----< Lecture registration successful ");
         System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
         int ans = sc.nextInt();
         sc.nextLine();
@@ -184,7 +185,7 @@ public class Admin extends Users implements java.io.Serializable {
     public void manage_module() {
         Scanner sc = new Scanner(System.in);
         int adminchoice;
-        System.out.println("\nWelcome to Module page");
+        System.out.println("\n----< Welcome to Module page >----");
         System.out.println("\n Select function:\n 1.New intake\n 2.Add module\n 3.View module\n 4.Delete Module\n 5.Exit \n 6.Main Menu \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
@@ -221,7 +222,7 @@ public class Admin extends Users implements java.io.Serializable {
         String ic;
 
         //Check if studentID already exists
-        System.out.print("----<Add new intake>----\n");
+        System.out.print("\n----<Add new intake>----\n");
 
         do {
             System.out.print("\nPlease enter Intake Code:");
@@ -401,7 +402,7 @@ public class Admin extends Users implements java.io.Serializable {
             if (moduleinfile.getmodulecode() == moduleToDelete) { //Check if module code exists
                 iter.remove();
                 moduleExists = 1;
-                System.out.println("\nThe module : " + moduleToDelete + " has been deleted.");
+                System.out.println("\nThe module with code: " + moduleToDelete + " has been deleted.");
             }
         }
         if (moduleExists == 0) {
@@ -456,7 +457,7 @@ public class Admin extends Users implements java.io.Serializable {
     public void manage_student() {
         Scanner sc = new Scanner(System.in);
         int adminchoice;
-        System.out.println("\nWelcome to Student Management page");
+        System.out.println("\n----< Welcome to Student Management page >----");
         System.out.println("\n Select function:\n 1.Add student\n 2.Delete Student\n 3.Search Student\n 4.Edit student details\n 5.View student details \n 6.Manage Mark\n 7.Exit \n 8.Main Menu \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
@@ -494,7 +495,7 @@ public class Admin extends Users implements java.io.Serializable {
     public void manage_mark() {
         Scanner sc = new Scanner(System.in);
         int adminchoice;
-        System.out.println("\nWelcome to Marks Management page");
+        System.out.println("\n----< Welcome to Marks Management page >----");
         System.out.println("\n Select function:\n 1.View all marks\n 2.Generate report\n 3.Exit \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
@@ -860,63 +861,58 @@ public class Admin extends Users implements java.io.Serializable {
         }
     }
 
-    public void view_student() {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Mark> mark_list = LandingPage.ReadFromFile("Mark.txt");
+public void view_student() {
+           Scanner sc = new Scanner(System.in);
         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
-        int studenthasmark = 0;
-        int count = 1;
-        System.out.println("\n----< Student Marks Details >----\nBelows are the information of students marks:\n");
+        int i = 1;
+        System.out.println("\n----< Student Details >----\nBelows are the information of students:\n");
         for (Student student : student_list) {
-            int temp = student.getstudentid();
-
-            for (Mark mark2 : mark_list) {
-                if (temp == mark2.getstudent().getstudentid()) {
-                    studenthasmark = 1;
-                }
-            }
-            if (studenthasmark == 1) {
-                System.out.print("Student record # " + count + " :" + student.toString() + "\n");
-                System.out.println("\n-------------------------------\n");
-                for (Mark mark3 : mark_list) {
-                    if (temp == mark3.getstudent().getstudentid()) {
-                        System.out.println(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark());
-                        System.out.println("\n");
-                    }
-                }
-                studenthasmark = 0;
-                count++;
-            }
+            System.out.print("Student " + i + " :");
+            System.out.println(student);
+            System.out.println("--------------------------");
+            i++;
         }
         System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
-        int ans = sc.nextInt();
-        sc.nextLine();
-        switch (ans) {
+            int ans = sc.nextInt();
+            sc.nextLine();
+            switch (ans) {
             case 1:
-                manage_student();
+                admin_function();
                 break;
 
             case 2:
                 System.out.println("\n< Thank you! >");
-                System.exit(0);
+                 System.exit(0);
                 break;
-        }
+            }
     }
 
     public void generate_report() {
         Document document = new Document();
+
         try {
+            
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Report.pdf"));
             document.open();
             Paragraph p1 = new Paragraph();
             p1.setSpacingBefore(25);
-            Font font1 = FontFactory.getFont(FontFactory.HELVETICA, 22, Font.BOLD);
+            
+            Font font1 = FontFactory.getFont(FontFactory.HELVETICA, 22, Font.BOLD, BaseColor.BLUE);
+            Font font2 = FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.ITALIC);
+            Font font3 = FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD);
+            Font font4 = FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.NORMAL);
+    
+            
             document.add(new Paragraph("Student Report", font1));
+            document.add(new Paragraph("Report generated on " + new Date(), font2));
+            p1.setSpacingBefore(25);
+           
             ArrayList<Mark> mark_list = LandingPage.ReadFromFile("Mark.txt");
             ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
 
             int studenthasmark = 0;
             int count = 1;
+            int recordexist =0;
             for (Student student : student_list) {
                 int temp = student.getstudentid();
 
@@ -926,17 +922,29 @@ public class Admin extends Users implements java.io.Serializable {
                     }
                 }
                 if (studenthasmark == 1) {
-                    document.add(new Paragraph("Student record # " + count + " :" + student.toString() + "\n"));
+                    document.add(new Paragraph("Student record # "+ count + " :",font3));
+                    document.add(new Paragraph(student.toString() + "\n---------------------------------------------------", font4));
+                    p1.setSpacingBefore(25);
                     for (Mark mark3 : mark_list) {
                         if (temp == mark3.getstudent().getstudentid()) {
-                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark()));
+                            recordexist = 1;
+                            
+                            
+                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark() +"\nGrade: " +mark3.grade() + "\nGrade Point: " +mark3.gpa() +"\nComment: " +mark3.comment()));
                             document.add(p1);
+                            
+                       
                         }
                     }
                     studenthasmark = 0;
                     count++;
+                    document.newPage();
                 }
             }
+
+            
+            
+            
             document.close();
         } catch (DocumentException e) {
             e.printStackTrace();

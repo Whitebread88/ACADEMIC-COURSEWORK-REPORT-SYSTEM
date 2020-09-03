@@ -1,3 +1,5 @@
+
+  
 package assignment;
 
 import com.itextpdf.text.BaseColor;
@@ -37,14 +39,14 @@ public class Lecturer extends Users implements java.io.Serializable {
         int flag = 1;
         String lect_username;
         if (flag != 0) {
-            System.out.println("\nLecturer Login page\nEnter your username: ");
+            System.out.println("\n----< Lecturer Login page >----\nEnter your username: ");
             lect_username = sc.nextLine();
             System.out.println("\nEnter your password: ");
             String lect_password = sc.nextLine();
             for (Lecturer lectinput : lecturer_list) {
                 if (lectinput.getusername().equals(lect_username) && lectinput.getpassword().equals(lect_password)) { //Check if customer exists
                     lect_login = lectinput;
-                    System.out.println("\nLogin Successfull\nGreetings " + lect_login.getfirstname() + " " + lect_login.getlastname());
+                    System.out.println("\n----< Login Successful >----\nGreetings " + lect_login.getfirstname() + " " + lect_login.getlastname());
                     flag = 0;
                     lecturer_function();
                 }
@@ -72,7 +74,7 @@ public class Lecturer extends Users implements java.io.Serializable {
     public void lecturer_function() {
         Scanner sc = new Scanner(System.in);
         int lecturerchoice;
-        System.out.println("\nWelcome to lecturer page");
+        System.out.println("\n----< Welcome to Lecturer Page >----");
         System.out.println("\n Select function:\n 1.Manage Student Marks\n 2.Generate Report\n 3.Exit \n\n Selection:");
         lecturerchoice = sc.nextInt();
         sc.nextLine();
@@ -95,7 +97,7 @@ public class Lecturer extends Users implements java.io.Serializable {
     public void manage_mark() {
         Scanner sc = new Scanner(System.in);
         int adminchoice;
-        System.out.println("\nWelcome to Marks Management page");
+        System.out.println("\n----< Welcome to Marks Management page >----");
         System.out.println("\n Select function:\n 1.View all students marks \n 2.Add Mark\n 3.Edit Mark \n 4.Delete Mark \n 5.Generate report \n 6.Exit \n\n Selection:");
         adminchoice = sc.nextInt();
         sc.nextLine();
@@ -228,18 +230,18 @@ public class Lecturer extends Users implements java.io.Serializable {
                 }
                 System.out.println("\nEnter Test Mark :  ");
                 int mark1 = sc.nextInt();
-                sc.nextLine();
+       
                 System.out.println("\nEnter Exam Mark :  ");
                 int mark2 = sc.nextInt();
-                sc.nextLine();
+               
                 System.out.println("\nEnter Assignment Mark :  ");
                 int mark3 = sc.nextInt();
-                sc.nextLine();
+                
 
                 Mark marklist = new Mark(s, m, markid, mark1, mark2, mark3);
                 mark_list.add(marklist);
                 module.setmarklist(mark_list);
-                System.out.println("\n Updated student details: \n" + marklist);
+                System.out.println("\n Updated student details: \n-----------------------------------------------\n" + marklist);
                 
                 LandingPage.WriteIntoFile("Mark.txt", mark_list);
 
@@ -498,3 +500,4 @@ public class Lecturer extends Users implements java.io.Serializable {
     }
 
 }
+

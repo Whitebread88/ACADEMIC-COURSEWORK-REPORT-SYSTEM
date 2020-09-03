@@ -115,6 +115,8 @@ public class Mark implements java.io.Serializable {
             comment = "Average";
         }else if(grade.equals("B")){
             comment = "Satisfactory";
+        }else if(grade.equals("B+")){
+            comment = "Not bad";
         }else if(grade.equals("A")){
             comment = "Good";
         }else if(grade.equals("A+")){
