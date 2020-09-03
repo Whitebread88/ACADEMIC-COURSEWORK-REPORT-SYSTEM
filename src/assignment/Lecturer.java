@@ -1,16 +1,22 @@
 package assignment;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Lecturer extends Users implements java.io.Serializable {
 
@@ -57,6 +63,7 @@ public class Lecturer extends Users implements java.io.Serializable {
 
                 case 2:
                     System.out.println("\n< Thank you! >");
+                    System.exit(0);
                     break;
             }
         }
@@ -122,6 +129,7 @@ public class Lecturer extends Users implements java.io.Serializable {
         System.out.println("\n----<Add Marks>----");
         ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
         ArrayList<Mark> mark_list = LandingPage.ReadFromFile("Mark.txt");
+        ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
         Student s = new Student();
         int id_checker = 0;
         int id_record = 0;
@@ -154,7 +162,7 @@ public class Lecturer extends Users implements java.io.Serializable {
                     break;
             }
         } else {
-            ArrayList<Module> module_list = LandingPage.ReadFromFile("Module.txt");
+            
             Module m = new Module();
             System.out.println("Enter module code to edit marks: ");
             int modulecode = sc.nextInt();
@@ -186,7 +194,7 @@ public class Lecturer extends Users implements java.io.Serializable {
                         break;
                 }
             } else {
-
+                
                 System.out.println("\nEnter marks: ");
                 Module module = new Module();
 
@@ -232,7 +240,7 @@ public class Lecturer extends Users implements java.io.Serializable {
                 mark_list.add(marklist);
                 module.setmarklist(mark_list);
                 System.out.println("\n Updated student details: \n" + marklist);
-
+                
                 LandingPage.WriteIntoFile("Mark.txt", mark_list);
 
                 System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Try again \n>3.Exit");
@@ -253,8 +261,12 @@ public class Lecturer extends Users implements java.io.Serializable {
                 }
 
             }
+           
+                        }
         }
-    }
+    
+        
+    
 
     public void edit_mark() {
         System.out.println("\n----< Edit mark>----\n");
@@ -305,7 +317,10 @@ public class Lecturer extends Users implements java.io.Serializable {
         m1.setexammark(newexam);
         m1.setassignmentmark(newassign);
         m1.settotalmark(m1.findtotalmark());
-
+        m1.setgrade(m1.grade());
+        m1.setcomment(m1.comment());
+        m1.setgpa(m1.gpa());
+        
         System.out.println("\nUpdated marks details are as below:\n" + m1);
         System.out.println("\n-------------------");
 
@@ -354,12 +369,13 @@ public class Lecturer extends Users implements java.io.Serializable {
                 System.out.println("\n-------------------------------\n");
                 for (Mark mark3 : mark_list) {
                     if (temp == mark3.getstudent().getstudentid()) {
-                        System.out.println(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark());
+                        System.out.println(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark() +"\nGrade: " +mark3.getgrade() +"\nGrade Point: " +mark3.getgpa() +"\nComment: " +mark3.getcomment());
                         System.out.println("\n");
                     }
                 }
                 studenthasmark = 0;
                 count++;
+                System.out.println("\n=======================================================");
             }
         }
         System.out.println("\nDo you want to continue?\n >1.Main Menu \n >2.Exit");
@@ -418,18 +434,30 @@ public class Lecturer extends Users implements java.io.Serializable {
 
     public void generate_report() {
         Document document = new Document();
+
         try {
+            
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Report.pdf"));
             document.open();
             Paragraph p1 = new Paragraph();
             p1.setSpacingBefore(25);
-            Font font1 = FontFactory.getFont(FontFactory.HELVETICA, 22, Font.BOLD);
+            
+            Font font1 = FontFactory.getFont(FontFactory.HELVETICA, 22, Font.BOLD, BaseColor.BLUE);
+            Font font2 = FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.ITALIC);
+            Font font3 = FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD);
+            Font font4 = FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.NORMAL);
+    
+            
             document.add(new Paragraph("Student Report", font1));
+            document.add(new Paragraph("Report generated on " + new Date(), font2));
+            p1.setSpacingBefore(25);
+           
             ArrayList<Mark> mark_list = LandingPage.ReadFromFile("Mark.txt");
             ArrayList<Student> student_list = LandingPage.ReadFromFile("Student.txt");
 
             int studenthasmark = 0;
             int count = 1;
+            int recordexist =0;
             for (Student student : student_list) {
                 int temp = student.getstudentid();
 
@@ -439,17 +467,29 @@ public class Lecturer extends Users implements java.io.Serializable {
                     }
                 }
                 if (studenthasmark == 1) {
-                    document.add(new Paragraph("Student record # " + count + " :" + student.toString() + "\n"));
+                    document.add(new Paragraph("Student record # "+ count + " :",font3));
+                    document.add(new Paragraph(student.toString() + "\n---------------------------------------------------", font4));
+                    p1.setSpacingBefore(25);
                     for (Mark mark3 : mark_list) {
                         if (temp == mark3.getstudent().getstudentid()) {
-                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark()));
+                            recordexist = 1;
+                            
+                            
+                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark() +"\nGrade: " +mark3.grade() + "\nGrade Point: " +mark3.gpa() +"\nComment: " +mark3.comment()));
                             document.add(p1);
+                            
+                       
                         }
                     }
                     studenthasmark = 0;
                     count++;
+                    document.newPage();
                 }
             }
+
+            
+            
+            
             document.close();
         } catch (DocumentException e) {
             e.printStackTrace();

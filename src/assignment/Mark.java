@@ -13,6 +13,10 @@ public class Mark implements java.io.Serializable {
     private int assignmentmark;
     private int totalmark;
     private ArrayList<Mark> marklist;
+    private String grade;
+    private String comment;
+    private double gpa;
+    private double cgpa;
     private Module module;
     private Student student;
     private static final long serialVersionUID = 1L;
@@ -83,6 +87,58 @@ public class Mark implements java.io.Serializable {
         return marklist;
     }
     
+    public String grade(){
+       if ( totalmark >= 0 & totalmark < 40){
+           grade = "Fail";
+       } else if ( totalmark >=40 & totalmark <50 ){
+           grade = "D";
+      } else if ( totalmark >=50 & totalmark <60 ){
+           grade = "C";
+      } else if ( totalmark >=60 & totalmark <70 ){
+           grade = "B";
+       } else if ( totalmark >=70 & totalmark <80 ){
+           grade = "B+";
+       }  else if ( totalmark >=80 & totalmark <90 ){
+           grade = "A";
+      } else if ( totalmark >=90 & totalmark <100 ){
+           grade = "A+";
+      }
+       return grade;
+    }
+    
+    public String comment(){
+        if (grade.equals("Fail")){
+            comment = "Bad.Try harder";
+        } else if(grade.equals("D")){
+            comment = "Try harder";
+        } else if(grade.equals("C")){
+            comment = "Average";
+        }else if(grade.equals("B")){
+            comment = "Satisfactory";
+        }else if(grade.equals("A")){
+            comment = "Good";
+        }else if(grade.equals("A+")){
+            comment = "Excellent";
+    }
+        return comment;
+    }
+    
+    public void setcomment(String comment){
+        this.comment = comment;
+    }
+    
+    public String getcomment(){
+        return comment;
+    }
+    
+    public void setgrade(String grade){
+        this.grade = grade;
+    }
+          
+    public String getgrade(){
+        return grade;
+    }
+    
     public void setmodule(Module module){
         this.module = module;
     }
@@ -99,9 +155,44 @@ public class Mark implements java.io.Serializable {
         return student;
     }
 
+    public double gpa(){
+        if ( totalmark >= 0 & totalmark < 40){
+           gpa = 2.0;
+       } else if ( totalmark >=40 & totalmark <50 ){
+           gpa = 2.5;
+      } else if ( totalmark >=50 & totalmark <60 ){
+           gpa = 2.75;
+      } else if ( totalmark >=60 & totalmark <70 ){
+           gpa = 3.00;
+       } else if ( totalmark >=70 & totalmark <80 ){
+           gpa = 3.30;
+       }  else if ( totalmark >=80 & totalmark <90 ){
+           gpa = 3.70;
+      } else if ( totalmark >=90 & totalmark <100 ){
+           gpa = 4.00;
+      }
+       return gpa;
+    }
+    
+  public void setgpa(double gpa){
+        this.gpa = gpa;
+    }
+    
+    public double getgpa(){
+        return gpa;
+    }
+    
+    public double cgpa(){
+             return cgpa;
+        }
+
+
+    
     public String toString(){
-        return "\nStudent: " +getstudent() + "\nModule: " +getmodule() + "\nMark ID: " +getmarkid() +"\nTest Mark: " +gettestmark() + "\nExam Mark: " +getexammark() +"\nAssignment Mark: " +getassignmentmark() + "\nTotal Marks: \n" + findtotalmark() + "\n-------------------------------------------"; 
+        return "\nStudent: " +getstudent() + "\nModule: " +getmodule() + "\nMark ID: " +getmarkid() +"\nTest Mark: " +gettestmark() + "\nExam Mark: " +getexammark() +"\nAssignment Mark: " +getassignmentmark() + "\nTotal Marks: " + findtotalmark() + "\nGrade: " +grade() +  "\nGrade Point: " +gpa() + "\nComment: " +comment() +"\n-------------------------------------------"; 
     }  
+
+   
     
     
 
