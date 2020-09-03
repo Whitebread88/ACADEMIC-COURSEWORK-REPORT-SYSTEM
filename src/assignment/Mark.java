@@ -16,7 +16,6 @@ public class Mark implements java.io.Serializable {
     private String grade;
     private String comment;
     private double gpa;
-    private double cgpa;
     private Module module;
     private Student student;
     private static final long serialVersionUID = 1L;
@@ -183,19 +182,10 @@ public class Mark implements java.io.Serializable {
     public double getgpa(){
         return gpa;
     }
-    
-    public double cgpa(){
-             return cgpa;
-        }
-
-
-    
+     
     public String toString(){
         return "\nStudent: " +getstudent() + "\nModule: " +getmodule() + "\nMark ID: " +getmarkid() +"\nTest Mark: " +gettestmark() + "\nExam Mark: " +getexammark() +"\nAssignment Mark: " +getassignmentmark() + "\nTotal Marks: " + findtotalmark() + "\nGrade: " +grade() +  "\nGrade Point: " +gpa() + "\nComment: " +comment() +"\n-------------------------------------------"; 
     }  
 
    
-    
-    
-
 }

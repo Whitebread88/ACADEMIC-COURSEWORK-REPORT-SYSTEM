@@ -946,6 +946,7 @@ public void view_student() {
             
             
             document.close();
+            System.out.println("\nReport successfully generated!");
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException EX) {

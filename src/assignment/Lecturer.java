@@ -436,7 +436,6 @@ public class Lecturer extends Users implements java.io.Serializable {
 
     public void generate_report() {
         Document document = new Document();
-
         try {
             
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Report.pdf"));
@@ -493,6 +492,7 @@ public class Lecturer extends Users implements java.io.Serializable {
             
             
             document.close();
+            System.out.println("\nReport successfully generated!");
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException EX) {
