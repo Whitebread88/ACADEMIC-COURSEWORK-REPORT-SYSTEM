@@ -1,9 +1,11 @@
 package assignment;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public abstract class Users implements java.io.Serializable {
-
+    
+    abstract void login();
     protected String username;
     protected String password;
     protected String firstname;
@@ -49,5 +51,7 @@ public abstract class Users implements java.io.Serializable {
     public String getlastname() {
         return lastname;
     }
+    
+ 
 
 }

@@ -32,13 +32,39 @@ public class Admin extends Users implements java.io.Serializable {
                     flag = 1;
                 } else {
                     System.out.println("\nIncorrect Password\nPlease try again");
-                }
-            } else {
+                    System.out.println("\nDo you want to retry?\n >1.Retry \n >2.Exit");
+                        int ans = sc.nextInt();
+                        sc.nextLine();
+                        switch (ans) {
+                            case 1:
+                                login();
+                                break;
+
+                            case 2:
+                                System.out.println("\n< Thank you! >");
+                                System.exit(0);
+                                break;
+                        }
+                            }
+                        } else {
                 System.out.println("\nIncorrect Username\nPlease try again");
-            }
-        }
-        System.out.println("Login Successful");
-        admin_function();
+                System.out.println("\nDo you want to retry?\n >1.Retry \n >2.Exit");
+                        int ans = sc.nextInt();
+                        sc.nextLine();
+                        switch (ans) {
+                            case 1:
+                                login();
+                                break;
+
+                            case 2:
+                                System.out.println("\n< Thank you! >");
+                                System.exit(0);
+                                break;
+                        }
+                        }
+                    }
+                    System.out.println("Login Successful");
+                    admin_function();
     }
 
     public void admin_function() {
