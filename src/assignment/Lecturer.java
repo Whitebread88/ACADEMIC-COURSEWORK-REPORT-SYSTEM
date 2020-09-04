@@ -447,7 +447,7 @@ public class Lecturer extends Users implements java.io.Serializable {
             Font font2 = FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.ITALIC);
             Font font3 = FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD);
             Font font4 = FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.NORMAL);
-    
+            Font font5 = FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.NORMAL);
             
             document.add(new Paragraph("Student Report", font1));
             document.add(new Paragraph("Report generated on " + new Date(), font2));
@@ -476,7 +476,7 @@ public class Lecturer extends Users implements java.io.Serializable {
                             recordexist = 1;
                             
                             
-                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark() +"\nGrade: " +mark3.grade() + "\nGrade Point: " +mark3.gpa() +"\nComment: " +mark3.comment()));
+                            document.add(new Paragraph(mark3.getmodule() + "\nMark ID: " + mark3.getmarkid() + "\nTest Mark: " + mark3.gettestmark() + "\nExam Mark: " + mark3.getexammark() + "\nAssignment Mark: " + mark3.getassignmentmark() + "\nTotal Mark: " + mark3.findtotalmark() +"\nGrade: " +mark3.grade() + "\nGrade Point: " +mark3.gpa() +"\nComment: " +mark3.comment(),font5));
                             document.add(p1);
                             
                        
